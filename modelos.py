@@ -74,3 +74,37 @@ class Carrito:
 
 
 
+
+#--PRUEBAS--
+
+if __name__ == "__main__":
+    print("--- INICIANDO PRUEBAS DEL CARRITO ---")
+
+    # 1. Creamos algunos productos de prueba
+    mouse = Producto(id_producto=1, nombre="Mouse Logitech", categoria="Periféricos", precio=25000.0, stock=10)
+    teclado = Producto(id_producto=2, nombre="Teclado Mecánico", categoria="Periféricos", precio=80000.0, stock=5)
+
+    # 2. Instanciamos nuestro carrito
+    mi_carrito = Carrito()
+
+    # 3. Agregamos ítems y probamos la lógica funcional
+    print(f"Stock del mouse antes de comprar: {mouse.stock}")
+    mi_carrito.agregar_item(id_item=1, producto=mouse, cantidad=2)
+    print(f"Stock del mouse después de agregar 2 al carrito: {mouse.stock}")
+
+    mi_carrito.agregar_item(id_item=2, producto=teclado, cantidad=1)
+
+    # 4. Verificamos los cálculos
+    print("\n--- RESUMEN DEL CARRITO ---")
+    for item in mi_carrito.lista_items:
+        print(f"- {item.cantidad}x {item.nombre_producto} | Subtotal: ${item.calcular_subtotal()}")
+
+    print(f"\nTOTAL A PAGAR: ${mi_carrito.calcular_total_general()}")
+
+    # 5. Probamos una validación (Intentar comprar algo sin stock)
+    print("\n--- PROBANDO VALIDACIONES ---")
+    try:
+        # Intentamos comprar 20 teclados (solo hay 5 en stock)
+        mi_carrito.agregar_item(id_item=3, producto=teclado, cantidad=20)
+    except ValueError as X:
+        print(f"¡Validación exitosa! El sistema frenó la compra y arrojó el error: {X}")
