@@ -1,0 +1,16 @@
+TRABAJO_FINAL/                      <-- Carpeta principal del proyecto
+│
+├── app.py                         <-- Archivo Python (.py) - Servidor Flask y Rutas
+├── modelos.py                     <-- Archivo Python (.py) - Clases (Producto, ItemCarrito, Carrito)
+├── base_datos.py                  <-- Archivo Python (.py) - Funciones SQL para SQLite
+├── tienda.db                      <-- Archivo de Base de Datos (.db) - Creado automáticamente por SQLite
+├── requirements.txt               <-- Archivo de Texto (.txt) - Lista de librerías (ej: Flask)
+├── .gitignore                     <-- Archivo de Configuración Git - Ignora carpetas como venv/
+│
+├── static/                        <-- Carpeta de Archivos Estáticos
+│   └── style.css                  <-- Archivo de Hojas de Estilo (.css) - Diseño y colores de la web
+│
+└── templates/                     <-- Carpeta de Plantillas HTML
+    ├── base.html                  <-- Archivo HTML (.html) - Esqueleto común y barra de navegación
+    ├── index.html                 <-- Archivo HTML (.html) - Pantalla principal (Catálogo de productos)
+    └── carrito.html               <-- Archivo HTML (.html) - Pantalla del carrito (Tabla de compras y totales)
