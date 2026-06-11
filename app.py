@@ -69,6 +69,54 @@ def agregar_al_carrito(id_producto):
     # Una vez hecha la acción, redirigimos al usuario de vuelta al catálogo
     return redirect(url_for('inicio'))
 
+
+# --- RUTA 3: VER EL CARRITO ---
+@app.route('/carrito')
+def ver_carrito():
+    """Muestra los ítems que se agregaron al carrito y calcula los totales."""
+    # Le pasamos al HTML la lista de ítems y el cálculo del total general usando los métodos de POO
+    return render_template(
+        'carrito.html',
+        items=carrito_actual.lista_items,
+        total=carrito_actual.calcular_total_general()
+    )
+
+
+# --- RUTA 4: QUITAR UN ÍTEM DEL CARRITO ---
+@app.route('/quitar/<int:id_producto>', methods=['POST'])
+def quitar_del_carrito(id_producto):
+    """Elimina un ítem del carrito y devuelve el stock correspondiente a SQLite."""
+    conexion = base_de_datos.obtener_conexion()
+    cursor = conexion.cursor()
+
+    # Buscamos cuántas unidades había en el carrito antes de borrarlo para devolverlas al stock
+    cantidad_a_devolver = 0
+    for item in carrito_actual.lista_items:
+        if item.id_item == id_producto:
+            cantidad_a_devolver = item.cantidad
+            break
+
+    if cantidad_a_devolver > 0:
+        # 1. Ejecutamos el método de nuestra clase Carrito para sacarlo de la lista en memoria
+        carrito_actual.quitar_item(id_producto)
+
+        # 2. Leemos el stock actual en la base de datos para sumarle lo devuelto
+        cursor.execute("SELECT stock FROM productos WHERE id_producto = ?", (id_producto,))
+        stock_actual = cursor.fetchone()[0]
+        nuevo_stock = stock_actual + cantidad_a_devolver
+
+        # 3. Guardamos el stock actualizado en SQLite
+        cursor.execute("UPDATE productos SET stock = ? WHERE id_producto = ?", (nuevo_stock, id_producto))
+        conexion.commit()
+        print(f"¡Éxito! Ítem quitado. Se devolvieron {cantidad_a_devolver} unidades al stock.")
+
+    conexion.close()
+
+    # Redirigimos de vuelta a la pantalla del carrito para mostrar los cambios
+    return redirect(url_for('ver_carrito'))
+
+
+
 # --- EJECUCIÓN ---
 if __name__ == '__main__':
     app.run(debug=True)

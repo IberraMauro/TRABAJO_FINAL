@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h2>Mi Carrito de Compras</h2>
+
+{% if items|length == 0 %}
+    <div style="text-align: center; margin-top: 40px;">
+        <p>Tu carrito está vacío actualmente.</p>
+        <a href="/" style="display: inline-block; margin-top: 15px; padding: 10px 15px; background-color: #34495e; color: white; text-decoration: none; border-radius: 4px;">Volver al Catálogo</a>
+    </div>
+{% else %}
+    <table class="tabla-carrito">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.nombre_producto }}</td>
+                <td>{{ item.categoria }}</td>
+                <td>${{ item.precio_unitario }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>${{ item.calcular_subtotal() }}</td>
+                <td>
+                    <form action="/quitar/{{ item.id_item }}" method="POST">
+                        <button type="submit" style="background-color: #e74c3c;">Quitar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="margin-top: 30px; text-align: right; border-top: 2px solid #ddd; padding-top: 15px;">
+        <h3>TOTAL A PAGAR: <span style="color: #27ae60;">${{ total }}</span></h3>
+        <br>
+        <a href="/" style="padding: 10px 15px; background-color: #7f8c8d; color: white; text-decoration: none; border-radius: 4px; margin-right: 10px;">Seguir Comprando</a>
+        <button onclick="alert('¡Compra simulada con éxito para el TP!')" style="padding: 10px 20px; font-size: 16px;">Finalizar Compra</button>
+    </div>
+{% endif %}
+{% endblock %}
