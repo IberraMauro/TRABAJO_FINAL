@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda de Tecnología - Grupo 8</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">🛒 Catálogo Tech</a> |
+            <a href="/carrito">Ver Mi Carrito</a>
+        </nav>
+    </header>
+
+    <main class="contenedor">
+        {% block contenido %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2026 - Trabajo Práctico Programación Avanzada | Grupo 8</p>
+    </footer>
+</body>
+</html>

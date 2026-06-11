@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h2>Catálogo de Productos Disponibles</h2>
+
+<table class="tabla-productos">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prod in productos %}
+        <tr>
+            <td>{{ prod[0] }}</td> <td>{{ prod[1] }}</td> <td>{{ prod[2] }}</td> <td>${{ prod[3] }}</td> <td>{{ prod[4] }}</td> <td>
+                <form action="/agregar/{{ prod[0] }}" method="POST">
+                    <input type="number" name="cantidad" value="1" min="1" max="{{ prod[4] }}" style="width: 50px;">
+                    <button type="submit">Agregar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
