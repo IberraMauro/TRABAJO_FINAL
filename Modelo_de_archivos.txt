@@ -1,4 +1,4 @@
-TRABAJO_FINAL/                      <-- Carpeta principal del proyecto
+TRABAJO_FINAL/                     <-- Carpeta principal del proyecto
 │
 ├── app.py                         <-- Archivo Python (.py) - Servidor Flask y Rutas
 ├── modelos.py                     <-- Archivo Python (.py) - Clases (Producto, ItemCarrito, Carrito)
@@ -13,4 +13,6 @@ TRABAJO_FINAL/                      <-- Carpeta principal del proyecto
 └── templates/                     <-- Carpeta de Plantillas HTML
     ├── base.html                  <-- Archivo HTML (.html) - Esqueleto común y barra de navegación
     ├── index.html                 <-- Archivo HTML (.html) - Pantalla principal (Catálogo de productos)
-    └── carrito.html               <-- Archivo HTML (.html) - Pantalla del carrito (Tabla de compras y totales)
+    ├── carrito.html               <-- Archivo HTML (.html) - Pantalla del carrito (Tabla de compras y totales)
+    ├── admin.html                 <-- Archivo HTML (.html) - Pantalla de administracion ABM
+    └── editar.html                <-- Archivo HTML (.html) - Pantalla de edicion individual
