@@ -41,22 +41,35 @@ class ItemCarrito:
 
 
 class Carrito:
-    #-Gestiona los ítems elegisdos para la compra-
-
     def __init__(self) ->None:
         self.lista_items = []
 
     def agregar_item(self, id_item: int, producto: Producto, cantidad: int) ->None:
-        #-Añade un nuevo ítem validando que haya stock y cantidad positiva-
-        if cantidad <= 0:
-            raise ValueError("Debe agregar al menos 1 producto.")
+        """Agrega un producto al carrito o incrementa la cantidad si ya existe."""
+        # 1. Validar que haya suficiente stock disponible en el objeto Producto
+        if producto.stock < cantidad:
+            raise ValueError(f"No hay suficiente stock disponible para {producto.nombre}.")
 
-        if producto.hay_stock(cantidad):
-            nuevo_item = ItemCarrito(id_item, producto, cantidad)
+        # 2. BUSQUEDA: Verificar si el producto ya está en el carrito
+        producto_encontrado = False
+        for item in self.lista_items:
+            if item.id_item == id_item:
+                # Si existe, en vez de duplicarlo, sumamos la nueva cantidad
+                item.cantidad += cantidad
+                producto_encontrado = True
+                break  # Salimos del bucle porque ya lo encontramos
+
+        # 3. Recorrimos toda la lista y NO existía, lo agregamos como ítem nuevo
+        if not producto_encontrado:
+            nuevo_item = ItemCarrito(
+                id_item=id_item,
+                producto=producto,
+                cantidad=cantidad
+            )
             self.lista_items.append(nuevo_item)
-            producto.actualizar_stock(-cantidad) # descontamos del stock
-        else:
-            raise ValueError("No hay stock suficiente para este producto.")
+
+        # 4. Descontamos el stock del objeto
+        producto.stock -= cantidad
 
     def quitar_item(self, id_item: int) ->None:
         #-Busca un ítem por su ID y lo elimina de la lista-
