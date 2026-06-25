@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h2>Panel de Administración (ABM)</h2>
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
+    <h3>Agregar Nuevo Producto (Alta)</h3>
+    <form action="/admin/agregar" method="POST" style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input type="text" name="nombre" placeholder="Nombre del producto" required style="padding: 8px; flex: 1;">
+        <input type="text" name="categoria" placeholder="Categoría" required style="padding: 8px; width: 150px;">
+        <input type="number" name="precio" placeholder="Precio" step="0.01" required style="padding: 8px; width: 100px;">
+        <input type="number" name="stock" placeholder="Stock" required style="padding: 8px; width: 80px;">
+        <button type="submit" style="background-color: #27ae60;">Guardar Producto</button>
+    </form>
+</div>
+
+<h3>Listado de Stock</h3>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prod in productos %}
+        <tr>
+            <td>{{ prod[0] }}</td>
+            <td>{{ prod[1] }}</td>
+            <td>{{ prod[2] }}</td>
+            <td>${{ prod[3] }}</td>
+            <td>{{ prod[4] }}</td>
+            <td>
+                <a href="/admin/editar/{{ prod[0] }}" style="display: inline-block; padding: 6px 12px; background-color: #f39c12; color: white; text-decoration: none; border-radius: 4px; margin-right: 5px;">Editar</a>
+
+                <form action="/admin/eliminar/{{ prod[0] }}" method="POST" style="display: inline-block;" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?');">
+                    <button type="submit" style="background-color: #e74c3c; padding: 6px 12px;">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

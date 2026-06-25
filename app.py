@@ -115,6 +115,59 @@ def quitar_del_carrito(id_producto):
     # Redirigimos de vuelta a la pantalla del carrito para mostrar los cambios
     return redirect(url_for('ver_carrito'))
 
+# --- RUTAS ADMINISTRATIVAS (ABM) ---
+
+@app.route('/admin')
+def panel_admin():
+    """Muestra el panel ABM con todos los productos."""
+    conexion = base_de_datos.obtener_conexion()
+    cursor = conexion.cursor()
+    cursor.execute("SELECT id_producto, nombre, categoria, precio, stock FROM productos")
+    todos_los_productos = cursor.fetchall()
+    conexion.close()
+    return render_template('admin.html', productos=todos_los_productos)
+
+@app.route('/admin/agregar', methods=['POST'])
+def admin_alta():
+    """Procesa el formulario para dar de alta un producto nuevo."""
+    nombre = request.form.get('nombre')
+    categoria = request.form.get('categoria')
+    precio = float(request.form.get('precio', 0))
+    stock = int(request.form.get('stock', 0))
+
+    # Llamamos a nuestra función de base_de_datos.py
+    base_de_datos.insertar_producto_nuevo(nombre, categoria, precio, stock)
+    return redirect(url_for('panel_admin'))
+
+@app.route('/admin/eliminar/<int:id_producto>', methods=['POST'])
+def admin_baja(id_producto):
+    """Procesa la solicitud de eliminación (Baja) de un producto."""
+    base_de_datos.eliminar_producto_por_id(id_producto)
+    return redirect(url_for('panel_admin'))
+
+@app.route('/admin/editar/<int:id_producto>', methods=['GET', 'POST'])
+def admin_modificacion(id_producto):
+    """Muestra el formulario con los datos viejos (GET) o procesa el cambio (POST)."""
+    conexion = base_de_datos.obtener_conexion()
+    cursor = conexion.cursor()
+
+    if request.method == 'POST':
+        # Si el usuario envió el formulario con los datos modificados
+        nombre = request.form.get('nombre')
+        categoria = request.form.get('categoria')
+        precio = float(request.form.get('precio', 0))
+        stock = int(request.form.get('stock', 0))
+
+        base_de_datos.modificar_producto_existente(id_producto, nombre, categoria, precio, stock)
+        conexion.close()
+        return redirect(url_for('panel_admin'))
+
+    else:
+        # Si el usuario solo hizo clic en "Editar", buscamos sus datos para mostrarlos en las cajas
+        cursor.execute("SELECT id_producto, nombre, categoria, precio, stock FROM productos WHERE id_producto = ?", (id_producto,))
+        prod = cursor.fetchone()
+        conexion.close()
+        return render_template('editar.html', producto=prod)
 
 
 # --- EJECUCIÓN ---

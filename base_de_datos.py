@@ -55,6 +55,38 @@ def insertar_productos_iniciales():
 
     conexion.close()
 
+def eliminar_producto_por_id(id_producto: int):
+    """Baja: Elimina un producto permanentemente de la tabla."""
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+    cursor.execute("DELETE FROM productos WHERE id_producto = ?", (id_producto,))
+    conexion.commit()
+    conexion.close()
+
+def insertar_producto_nuevo(nombre: str, categoria: str, precio: float, stock: int):
+    """Alta: Guarda un nuevo producto tecnológico en la tabla."""
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+    cursor.execute('''
+        INSERT INTO productos (nombre, categoria, precio, stock)
+        VALUES (?, ?, ?, ?)
+    ''', (nombre, categoria, precio, stock))
+    conexion.commit()
+    conexion.close()
+
+def modificar_producto_existente(id_producto: int, nombre: str, categoria: str, precio: float, stock: int):
+    """Modificación: Actualiza todos los campos de un producto específico."""
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+    cursor.execute('''
+        UPDATE productos
+        SET nombre = ?, categoria = ?, precio = ?, stock = ?
+        WHERE id_producto = ?
+    ''', (nombre, categoria, precio, stock, id_producto))
+    conexion.commit()
+    conexion.close()
+
+
 # --- EJECUCIÓN DIRECTA ---
 if __name__ == "__main__":
     print("--- PREPARANDO BASE DE DATOS ---")

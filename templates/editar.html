@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+<h2>Modificar Producto (ID: {{ producto[0] }})</h2>
+
+<div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; border: 1px solid #ddd; max-width: 500px; margin: 0 auto;">
+    <form action="/admin/editar/{{ producto[0] }}" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+        <label>Nombre:
+            <input type="text" name="nombre" value="{{ producto[1] }}" required style="width: 100%; padding: 8px;">
+        </label>
+        <label>Categoría:
+            <input type="text" name="categoria" value="{{ producto[2] }}" required style="width: 100%; padding: 8px;">
+        </label>
+        <label>Precio:
+            <input type="number" name="precio" value="{{ producto[3] }}" step="0.01" required style="width: 100%; padding: 8px;">
+        </label>
+        <label>Stock:
+            <input type="number" name="stock" value="{{ producto[4] }}" required style="width: 100%; padding: 8px;">
+        </label>
+
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <button type="submit" style="background-color: #2980b9; flex: 1;">Actualizar Cambios</button>
+            <a href="/admin" style="display: inline-block; padding: 10px; background-color: #7f8c8d; color: white; text-decoration: none; border-radius: 4px; text-align: center; flex: 1;">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
