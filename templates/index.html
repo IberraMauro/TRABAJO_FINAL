@@ -1,30 +1,34 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<h2>Catálogo de Productos Disponibles</h2>
+<h2 class="titulo-seccion"> </h2>
 
-<table class="tabla-productos">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Acción</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for prod in productos %}
-        <tr>
-            <td>{{ prod[0] }}</td> <td>{{ prod[1] }}</td> <td>{{ prod[2] }}</td> <td>${{ prod[3] }}</td> <td>{{ prod[4] }}</td> <td>
-                <form action="/agregar/{{ prod[0] }}" method="POST">
-                    <input type="number" name="cantidad" value="1" min="1" max="{{ prod[4] }}" style="width: 50px;">
-                    <button type="submit">Agregar</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="grid-productos">
+    {% for prod in productos %}
+    <div class="tarjeta-producto">
+        <div class="contenedor-imagen">
+            <img src="{{ prod[5] }}" alt="{{ prod[1] }}">
+        </div>
+
+        <div class="informacion-producto">
+            <span class="categoria-etiqueta">{{ prod[2] }}</span>
+            <h3 class="producto-nombre">{{ prod[1] }}</h3>
+
+            <div class="precio-contenedor">
+                <span class="producto-precio">${{ "{:,.2f}".format(prod[3]) }}</span>
+            </div>
+
+            <p class="stock-disponible">Stock disponible: <strong>{{ prod[4] }}</strong></p>
+
+            <form action="/agregar/{{ prod[0] }}" method="POST" class="formulario-compra">
+                <div class="selector-cantidad">
+                    <label for="cant-{{ prod[0] }}">Cant:</label>
+                    <input type="number" id="cant-{{ prod[0] }}" name="cantidad" value="1" min="1" max="{{ prod[4] }}">
+                </div>
+                <button type="submit" class="boton-agregar">Agregar al carrito</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

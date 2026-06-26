@@ -18,7 +18,7 @@ def inicio():
     cursor = conexion.cursor()
 
     # Traemos todos los productos tecnológicos de la tabla
-    cursor.execute("SELECT id_producto, nombre, categoria, precio, stock FROM productos")
+    cursor.execute("SELECT id_producto, nombre, categoria, precio, stock, imagen FROM productos")
     todos_los_productos = cursor.fetchall()
 
     conexion.close()
@@ -38,7 +38,7 @@ def agregar_al_carrito(id_producto):
     cursor = conexion.cursor()
 
     # 1. Buscamos el producto seleccionado en la base de datos para recrear el Objeto
-    cursor.execute("SELECT id_producto, nombre, categoria, precio, stock FROM productos WHERE id_producto = ?", (id_producto,))
+    cursor.execute("SELECT id_producto, nombre, categoria, precio, stock, imagen FROM productos WHERE id_producto = ?", (id_producto,))
     datos_prod = cursor.fetchone()
 
     if datos_prod:
@@ -48,7 +48,8 @@ def agregar_al_carrito(id_producto):
             nombre=datos_prod[1],
             categoria=datos_prod[2],
             precio=datos_prod[3],
-            stock=datos_prod[4]
+            stock=datos_prod[4],
+            imagen=datos_prod[5]
         )
 
         try:
@@ -134,9 +135,10 @@ def admin_alta():
     categoria = request.form.get('categoria')
     precio = float(request.form.get('precio', 0))
     stock = int(request.form.get('stock', 0))
+    imagen = request.form.get('imagen')
 
     # Llamamos a nuestra función de base_de_datos.py
-    base_de_datos.insertar_producto_nuevo(nombre, categoria, precio, stock)
+    base_de_datos.insertar_producto_nuevo(nombre, categoria, precio, stock, imagen)
     return redirect(url_for('panel_admin'))
 
 @app.route('/admin/eliminar/<int:id_producto>', methods=['POST'])
@@ -157,14 +159,15 @@ def admin_modificacion(id_producto):
         categoria = request.form.get('categoria')
         precio = float(request.form.get('precio', 0))
         stock = int(request.form.get('stock', 0))
+        imagen = request.form.get('imagen')
 
-        base_de_datos.modificar_producto_existente(id_producto, nombre, categoria, precio, stock)
+        base_de_datos.modificar_producto_existente(id_producto, nombre, categoria, precio, stock, imagen)
         conexion.close()
         return redirect(url_for('panel_admin'))
 
     else:
         # Si el usuario solo hizo clic en "Editar", buscamos sus datos para mostrarlos en las cajas
-        cursor.execute("SELECT id_producto, nombre, categoria, precio, stock FROM productos WHERE id_producto = ?", (id_producto,))
+        cursor.execute("SELECT id_producto, nombre, categoria, precio, stock, imagen FROM productos WHERE id_producto = ?", (id_producto,))
         prod = cursor.fetchone()
         conexion.close()
         return render_template('editar.html', producto=prod)

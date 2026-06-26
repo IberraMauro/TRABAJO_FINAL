@@ -1,12 +1,13 @@
 class Producto:
     #-Representa un artículo tecnológico de la tienda-
 
-    def __init__(self, id_producto: int, nombre: str, categoria: str, precio: float, stock: int) ->None:
+    def __init__(self, id_producto: int, nombre: str, categoria: str, precio: float, stock: int, imagen: str = "") ->None:
         self.id_producto = id_producto
         self.nombre = nombre
         self.categoria = categoria
         self.precio = precio
         self.stock = stock
+        self.imagen = imagen
 
     def hay_stock(self, cantidad_requerida: int) ->bool:
         #-Verifica si hay stock-
@@ -27,6 +28,7 @@ class ItemCarrito:
         self.precio_unitario = producto.precio
         self.categoria = producto.categoria
         self.cantidad = cantidad
+        self.imagen = producto.imagen
 
     def calcular_subtotal(self) ->float:
         #-Devuelve el costo total de esta línea-

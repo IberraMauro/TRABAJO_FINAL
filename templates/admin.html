@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<h2>Panel de Administración (ABM)</h2>
+<h2>Panel de Administración</h2>
 
 <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #ddd;">
-    <h3>Agregar Nuevo Producto (Alta)</h3>
+    <h3>Agregar Nuevo Producto</h3>
     <form action="/admin/agregar" method="POST" style="display: flex; gap: 10px; flex-wrap: wrap;">
         <input type="text" name="nombre" placeholder="Nombre del producto" required style="padding: 8px; flex: 1;">
         <input type="text" name="categoria" placeholder="Categoría" required style="padding: 8px; width: 150px;">
         <input type="number" name="precio" placeholder="Precio" step="0.01" required style="padding: 8px; width: 100px;">
         <input type="number" name="stock" placeholder="Stock" required style="padding: 8px; width: 80px;">
+        <input type="url" name="imagen" placeholder="URL de la imagen (ej: https://...)" required style="padding: 8px; width: 100%;">
         <button type="submit" style="background-color: #27ae60;">Guardar Producto</button>
     </form>
 </div>

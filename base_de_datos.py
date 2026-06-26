@@ -17,7 +17,8 @@ def crear_tablas():
             nombre TEXT NOT NULL,
             categoria TEXT NOT NULL,
             precio REAL NOT NULL,
-            stock INTEGER NOT NULL
+            stock INTEGER NOT NULL,
+            imagen TEXT NOT NULL
         )
     ''')
 
@@ -36,16 +37,16 @@ def insertar_productos_iniciales():
 
     if cantidad == 0:
         productos_prueba = [
-            ("Monitor 24 pulgadas", "Monitores", 150000.0, 10),
-            ("Teclado Mecánico RGB", "Periféricos", 85000.0, 15),
-            ("Mouse Inalámbrico", "Periféricos", 25000.0, 20),
-            ("Auriculares Gaming", "Audio", 60000.0, 8)
+            ("Monitor 24 pulgadas", "Monitores", 150000.0, 10, "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500"),
+            ("Teclado Mecánico RGB", "Periféricos", 85000.0, 15, "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500"),
+            ("Mouse Inalámbrico", "Periféricos", 25000.0, 20, "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500"),
+            ("Auriculares Gaming", "Audio", 60000.0, 8, "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500")
         ]
 
         # Insertamos los datos de prueba
         cursor.executemany('''
-            INSERT INTO productos (nombre, categoria, precio, stock)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO productos (nombre, categoria, precio, stock, imagen)
+            VALUES (?, ?, ?, ?, ?)
         ''', productos_prueba)
 
         conexion.commit()
@@ -63,26 +64,26 @@ def eliminar_producto_por_id(id_producto: int):
     conexion.commit()
     conexion.close()
 
-def insertar_producto_nuevo(nombre: str, categoria: str, precio: float, stock: int):
+def insertar_producto_nuevo(nombre: str, categoria: str, precio: float, stock: int, imagen: str):
     """Alta: Guarda un nuevo producto tecnológico en la tabla."""
     conexion = obtener_conexion()
     cursor = conexion.cursor()
     cursor.execute('''
-        INSERT INTO productos (nombre, categoria, precio, stock)
-        VALUES (?, ?, ?, ?)
-    ''', (nombre, categoria, precio, stock))
+        INSERT INTO productos (nombre, categoria, precio, stock, imagen)
+        VALUES (?, ?, ?, ?, ?)
+    ''', (nombre, categoria, precio, stock, imagen))
     conexion.commit()
     conexion.close()
 
-def modificar_producto_existente(id_producto: int, nombre: str, categoria: str, precio: float, stock: int):
+def modificar_producto_existente(id_producto: int, nombre: str, categoria: str, precio: float, stock: int, imagen: str):
     """Modificación: Actualiza todos los campos de un producto específico."""
     conexion = obtener_conexion()
     cursor = conexion.cursor()
     cursor.execute('''
         UPDATE productos
-        SET nombre = ?, categoria = ?, precio = ?, stock = ?
+        SET nombre = ?, categoria = ?, precio = ?, stock = ?, imagen = ?
         WHERE id_producto = ?
-    ''', (nombre, categoria, precio, stock, id_producto))
+    ''', (nombre, categoria, precio, stock, imagen, id_producto))
     conexion.commit()
     conexion.close()
 
