@@ -38,9 +38,19 @@ def insertar_productos_iniciales():
     if cantidad == 0:
         productos_prueba = [
             ("Monitor 24 pulgadas", "Monitores", 150000.0, 10, "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500"),
-            ("Teclado Mecánico RGB", "Periféricos", 85000.0, 15, "https://images.unsplash.com/photo-1595225476474-87563907a212?w=500"),
+            ("Teclado Mecánico RGB", "Periféricos", 85000.0, 15, "https://http2.mlstatic.com/D_Q_NP_891961-MLA100174230909_122025-O.webp"),
             ("Mouse Inalámbrico", "Periféricos", 25000.0, 20, "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500"),
-            ("Auriculares Gaming", "Audio", 60000.0, 8, "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=500")
+            ("Auriculares Gaming", "Audio", 60000.0, 8, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-XA_Cks2J6V_DE_3N_3Juuk2YBTRfHE62DHNBgozEYRGR4HswPFJGqxps&s=10"),
+            ("Silla Gamer Ergonómica FT-055", "Muebles", 250000.0, 5, "https://acdn-us.mitiendanube.com/stores/006/281/009/products/001-1f61129394f297f90317647726844734-1024-1024.webp"),
+            ("Micrófono Condensador USB", "Audio", 45000.0, 12, "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=500"),
+            ("Placa de Video RTX 4060", "Componentes", 600000.0, 3, "https://static.nb.com.ar/i/nb_PLACA-DE-VIDEO-GIGABYTE-RTX-4060-EAGLE-OC-8GB_ver_1926c9b72f1f01cb8c9b572a79f75e8a.jpg"),
+            ("Memoria RAM 16GB DDR4", "Componentes", 55000.0, 25, "https://mauricomputacion.com.ar/images/productos/23853.webp"),
+            ("Disco Sólido SSD 1TB", "Almacenamiento", 80000.0, 30, "https://images.unsplash.com/photo-1531492746076-161ca9bcad58?w=500"),
+            ("Gabinete ATX Cristal Templado", "Componentes", 95000.0, 7, "https://www.gamingcity.com.ar/thumb/000000000001717318086Gabinete-ASUS-TUF-Gaming-GT502-Horizon-White-ATX-Vidrio-Templado_800x800.jpg"),
+            ("Webcam Full HD 1080p", "Periféricos", 35000.0, 18, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlEA59LOQVUqkOfbc1BkeOrGryiaeBaA0300WfYiOWwVQqZ7Yb3UHJqA&s=10"),
+            ("Pad Mouse XXL RGB", "Accesorios", 15000.0, 40, "https://casatecno.com.ar/img/Public/1108/1741-producto-d-nq-np-2x-763046-mlu73342903412-122023-f.jpg"),
+            ("Procesador Ryzen 5 5600G", "Componentes", 220000.0, 10, "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=500"),
+            ("Fuente de Poder 650W 80+", "Componentes", 75000.0, 15, "https://http2.mlstatic.com/D_NQ_NP_640995-MLA99936132579_112025-O.webp")
         ]
 
         # Insertamos los datos de prueba

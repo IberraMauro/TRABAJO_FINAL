@@ -43,7 +43,9 @@
         <br>
         <div style="display: flex; justify-content: flex-end; gap: 15px;">
             <a href="/" class="btn btn-secondary">Seguir Comprando</a>
-            <button onclick="alert('¡Compra simulada con éxito para el TP!')" class="btn btn-success">Finalizar Compra</button>
+            <form action="/comprar" method="POST" style="margin: 0;">
+                <button type="submit" class="btn btn-success" onclick="alert('¡Compra finalizada con éxito! El stock ha sido actualizado en la base de datos.')">Finalizar Compra</button>
+            </form>
         </div>
     </div>
 {% endif %}

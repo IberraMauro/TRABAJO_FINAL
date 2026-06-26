@@ -5,9 +5,13 @@
 
 <div class="grid-productos">
     {% for prod in productos %}
-    <div class="tarjeta-producto">
-        <div class="contenedor-imagen">
+    <div class="tarjeta-producto {% if prod[4] <= 0 %}agotado{% endif %}">
+
+        <div class="contenedor-imagen" style="position: relative;">
             <img src="{{ prod[5] }}" alt="{{ prod[1] }}">
+            {% if prod[4] <= 0 %}
+            <div class="sello-agotado">AGOTADO</div>
+            {% endif %}
         </div>
 
         <div class="informacion-producto">
@@ -20,13 +24,17 @@
 
             <p class="stock-disponible">Stock disponible: <strong>{{ prod[4] }}</strong></p>
 
-            <form action="/agregar/{{ prod[0] }}" method="POST" class="formulario-compra">
-                <div class="selector-cantidad">
-                    <label for="cant-{{ prod[0] }}">Cant:</label>
-                    <input type="number" id="cant-{{ prod[0] }}" name="cantidad" value="1" min="1" max="{{ prod[4] }}">
-                </div>
-                <button type="submit" class="boton-agregar">Agregar al carrito</button>
-            </form>
+            {% if prod[4] > 0 %}
+                <form action="/agregar/{{ prod[0] }}" method="POST" class="formulario-compra">
+                    <div class="selector-cantidad">
+                        <label for="cant-{{ prod[0] }}">Cant:</label>
+                        <input type="number" id="cant-{{ prod[0] }}" name="cantidad" value="1" min="1" max="{{ prod[4] }}">
+                    </div>
+                    <button type="submit" class="boton-agregar">Agregar al carrito</button>
+                </form>
+            {% else %}
+                <button class="boton-agotado" disabled>Sin Stock</button>
+            {% endif %}
         </div>
     </div>
     {% endfor %}

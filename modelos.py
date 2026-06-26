@@ -46,6 +46,13 @@ class Carrito:
     def __init__(self) ->None:
         self.lista_items = []
 
+    def obtener_cantidad_producto(self, id_producto: int) -> int:
+        """Devuelve cuántas unidades de un producto ya están reservadas en el carrito."""
+        for item in self.lista_items:
+            if item.id_item == id_producto:
+                return item.cantidad
+        return 0  # Si no está en el carrito, devuelve 0
+
     def agregar_item(self, id_item: int, producto: Producto, cantidad: int) ->None:
         """Agrega un producto al carrito o incrementa la cantidad si ya existe."""
         # 1. Validar que haya suficiente stock disponible en el objeto Producto

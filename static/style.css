@@ -13,7 +13,7 @@ body {
     min-height: 100vh;
 }
 
-/* Esta clase separa TODO (títulos y tablas) de los bordes laterales y superiores */
+/* Esta clase separa TODO de los bordes laterales y superiores */
 .contenedor {
     flex: 1; /* Ocupa el espacio libre restante */
     max-width: 1200px;
@@ -81,7 +81,7 @@ th, td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
 th { background-color: #f8f9fa; color: #333; font-weight: 600; text-transform: uppercase; font-size: 13px; }
 tr:hover { background-color: #f8f9fa; }
 
-/* --- DISEÑO DE BOTONES UNIVERSALES --- */
+/* --- DISEÑO DE BOTONES --- */
 .btn {
     padding: 10px 15px;
     border: none;
@@ -134,3 +134,43 @@ tr:hover { background-color: #f8f9fa; }
 .selector-cantidad input { width: 50px; padding: 4px; border: 1px solid #ccc; border-radius: 4px; }
 .boton-agregar { width: 100%; background-color: #3483fa; color: white; border: none; padding: 10px; font-size: 14px; font-weight: 600; border-radius: 6px; cursor: pointer; transition: background-color 0.2s; }
 .boton-agregar:hover { background-color: #2968c8; }
+
+
+/* --- ESTILOS PARA PRODUCTOS AGOTADOS --- */
+
+/* Hace que toda la tarjeta pierda color y quede semi-transparente */
+.tarjeta-producto.agotado {
+    filter: grayscale(80%);
+    opacity: 0.8;
+}
+
+/* El sello rojo en diagonal */
+.sello-agotado {
+    position: absolute; /* Permite superponer el texto sobre la imagen */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-35deg); /* Centra y rota el rectángulo */
+    color: #e74c3c;
+    border: 3px solid #e74c3c;
+    padding: 8px 15px;
+    font-size: 22px;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco un poco transparente */
+    letter-spacing: 2px;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+/* Botón gris para reemplazar al azul de agregar al carrito */
+.boton-agotado {
+    width: 100%;
+    background-color: #e0e0e0;
+    color: #888;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: not-allowed;
+    margin-top: auto;
+}

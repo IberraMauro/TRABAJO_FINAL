@@ -8,8 +8,8 @@
     <form action="/admin/agregar" method="POST" style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
         <input type="text" name="nombre" placeholder="Nombre del producto" required style="padding: 10px; flex: 1; min-width: 200px;">
         <input type="text" name="categoria" placeholder="Categoría" required style="padding: 10px; width: 150px;">
-        <input type="number" name="precio" placeholder="Precio" step="0.01" required style="padding: 10px; width: 120px;">
-        <input type="number" name="stock" placeholder="Stock" required style="padding: 10px; width: 100px;">
+        <input type="number" name="precio" placeholder="Precio" step="0.01" min="0" required style="padding: 10px; width: 120px;">
+        <input type="number" name="stock" placeholder="Stock" min="0" required style="padding: 10px; width: 100px;">
         <input type="url" name="imagen" placeholder="URL de la imagen (ej: https://...)" required style="padding: 10px; width: 100%;">
         <button type="submit" class="btn btn-success" style="width: 100%; padding: 12px;">Guardar Nuevo Producto</button>
     </form>
