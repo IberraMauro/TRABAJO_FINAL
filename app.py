@@ -67,6 +67,7 @@ def finalizar_compra():
 
     catalogo.finalizar_compra(carrito_actual)
     carrito_actual.lista_items.clear()
+    flash('¡Compra realizada con éxito!', 'success')
     return redirect(url_for('inicio'))
 
 
@@ -89,6 +90,7 @@ def admin_alta():
     imagen = request.form.get('imagen')
 
     catalogo.insertar_producto(nombre, categoria, precio, stock, imagen)
+    flash('Producto agregado correctamente.', 'success')
     return redirect(url_for('panel_admin'))
 
 
@@ -96,6 +98,7 @@ def admin_alta():
 def admin_baja(id_producto):
     """Procesa la solicitud de eliminacion de un producto."""
     catalogo.eliminar_producto(id_producto)
+    flash('Producto eliminado correctamente.', 'success')
     return redirect(url_for('panel_admin'))
 
 
@@ -110,6 +113,7 @@ def admin_modificacion(id_producto):
         imagen = request.form.get('imagen')
 
         catalogo.modificar_producto(id_producto, nombre, categoria, precio, stock, imagen)
+        flash('Producto actualizado correctamente.', 'success')
         return redirect(url_for('panel_admin'))
 
     prod = catalogo.obtener_producto_por_id(id_producto)
