@@ -9,6 +9,13 @@ app = Flask(__name__)
 # Esto mantendrá los productos seleccionados mientras el servidor esté corriendo
 carrito_actual = modelos.Carrito()
 
+@app.context_processor
+def inyectar_datos_carrito():
+    """Expone datos del carrito a todas las plantillas."""
+    return {
+        'cantidad_items_carrito': carrito_actual.calcular_cantidad_total_items()
+    }
+
 
 # --- RUTA 1: CATÁLOGO PRINCIPAL ---
 @app.route('/')

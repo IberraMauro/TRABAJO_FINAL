@@ -94,7 +94,12 @@ class Carrito:
             total += item.calcular_subtotal()
         return total
 
-
+    def calcular_cantidad_total_items(self) -> int:
+        """Suma las cantidades de todos los productos del carrito."""
+        total_items = 0
+        for item in self.lista_items:
+            total_items += item.cantidad
+        return total_items
 
 
 #--PRUEBAS--

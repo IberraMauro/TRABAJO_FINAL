@@ -9,7 +9,12 @@
     <header>
         <nav>
             <a href="/">💻 Catálogo Tech</a>
-            <a href="/carrito">🛒 Ver Mi Carrito</a>
+            <a href="/carrito" class="nav-carrito">
+                🛒 Ver Mi Carrito
+                {% if cantidad_items_carrito > 0 %}
+                    <span class="badge-carrito">{{ cantidad_items_carrito }}</span>
+                {% endif %}
+            </a>
             <a href="/admin">⚙️ Panel ABM</a>
         </nav>
     </header>
