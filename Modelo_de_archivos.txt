@@ -2,7 +2,7 @@ TRABAJO_FINAL/                     <-- Carpeta principal del proyecto
 │
 ├── app.py                         <-- Archivo Python (.py) - Servidor Flask y Rutas
 ├── modelos.py                     <-- Archivo Python (.py) - Clases (Producto, ItemCarrito, Carrito)
-├── catalogo.py                     -- Archivo Python (.py) - Encapsula la lógica del catálogo y mantiene app.py como controlador de rutas Flask.
+├── catalogo.py                    <-- Archivo Python (.py) - Encapsula la lógica del catálogo y mantiene app.py como controlador de rutas Flask.
 ├── base_datos.py                  <-- Archivo Python (.py) - Funciones SQL para SQLite
 ├── tienda.db                      <-- Archivo de Base de Datos (.db) - Creado automáticamente por SQLite
 ├── requirements.txt               <-- Archivo de Texto (.txt) - Lista de librerías (ej: Flask)
