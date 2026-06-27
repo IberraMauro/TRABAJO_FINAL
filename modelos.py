@@ -9,14 +9,6 @@ class Producto:
         self.stock = stock
         self.imagen = imagen
 
-    def hay_stock(self, cantidad_requerida: int) ->bool:
-        #-Verifica si hay stock-
-        return self.stock >= cantidad_requerida
-
-    def actualizar_stock(self, cantidad: int) ->None:
-        #-Modifica el stock-
-        self.stock += cantidad
-
 
 class ItemCarrito:
     #-Representa un producto dentro del carrito de compras-
@@ -28,18 +20,10 @@ class ItemCarrito:
         self.precio_unitario = producto.precio
         self.categoria = producto.categoria
         self.cantidad = cantidad
-        self.imagen = producto.imagen
 
     def calcular_subtotal(self) ->float:
         #-Devuelve el costo total de esta línea-
         return self.precio_unitario * self.cantidad
-
-    def modificar_cantidad(self, nueva_cantidad: int) ->None:
-        #-Actualiza la cantidad validando que sea un número positivo-
-        if nueva_cantidad > 0:
-            self.cantidad = nueva_cantidad
-        else:
-            raise ValueError("La cantidad debe ser positiva.")
 
 
 class Carrito:
