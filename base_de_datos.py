@@ -50,7 +50,25 @@ def insertar_productos_iniciales():
             ("Webcam Full HD 1080p", "Periféricos", 35000.0, 18, "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlEA59LOQVUqkOfbc1BkeOrGryiaeBaA0300WfYiOWwVQqZ7Yb3UHJqA&s=10"),
             ("Pad Mouse XXL RGB", "Accesorios", 15000.0, 40, "https://casatecno.com.ar/img/Public/1108/1741-producto-d-nq-np-2x-763046-mlu73342903412-122023-f.jpg"),
             ("Procesador Ryzen 5 5600G", "Componentes", 220000.0, 10, "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?w=500"),
-            ("Fuente de Poder 650W 80+", "Componentes", 75000.0, 15, "https://http2.mlstatic.com/D_NQ_NP_640995-MLA99936132579_112025-O.webp")
+            ("Fuente de Poder 650W 80+", "Componentes", 75000.0, 15, "https://http2.mlstatic.com/D_NQ_NP_640995-MLA99936132579_112025-O.webp"),
+            ("Volante Logitech G29 + Pedales", "Accesorios", 469829.0, 26, "https://mexx-img-2019.s3.amazonaws.com/Volante-Logitech-G29-Pedales-Ps4-Ps5-Pc_30260_1.jpeg"),
+            ('Tv Led 24" Kanji 60Hz KJ-24MT005-2', "Tv", 125319.0, 39, "https://mexx-img-2019.s3.amazonaws.com/Tv-Led-24-Kanji-60Hz-KJ-24MT005-2_50360_2.jpeg"),
+            ("Consola Portatil Anbernic RG353VS TR", "Consolas", 204999.0, 50, "https://mexx-img-2019.s3.amazonaws.com/Consola-Portatil-Anbernic-RG353VS-TR-Negro_50620_1.jpeg"),
+            ("Impresora Pantum Láser Mono P2509W", "Impresoras", 138619.0, 23, "https://mexx-img-2019.s3.amazonaws.com/Impresora-Pantum-laser-Mono-P2509W_47605_1.jpeg"),
+            ('Notebook Kanji Celeron N4020C 4Gb Ssd 128Gb 15.6" Win11', "Notebooks", 300000.0, 19, "https://mexx-img-2019.s3.amazonaws.com/Notebook-Kanji-Celeron-N4020C-4Gb-Ssd-128Gb-15-Win11_51258_1.jpeg"),
+            ("Memoria SD 128 Gb Canvas Go Plus Gen4 Kingston 4k", "Tarjetas de Memoria", 44689.0, 98, "https://mexx-img-2019.s3.amazonaws.com/Memoria-SD-128-Gb-Canvas-Go-Plus-Gen4-Kingston-4K_49898_1.jpeg"),
+            ('Monitor Gamer 27" Level Up Curvo Full Hd 200Hz 1Ms 27-UP6580C', "Monitores", 278119.0, 60, "https://mexx-img-2019.s3.amazonaws.com/Monitor-Gamer-27-Level-Up-Curvo-Full-Hd-200Hz-1Ms-27-UP6580C_50090_1.jpeg"),
+            ("Impresora Hp Láser Mono M501DN", "Impresoras", 587999.0, 41, "https://mexx-img-2019.s3.amazonaws.com/37679_1.jpeg"),
+            ("Parlante Logitech Z407 Graphite Bluetooth", "Audio", 186189.0, 23, "https://mexx-img-2019.s3.amazonaws.com/Parlante-Logitech-Z407-Graphite-Bluetooth_39981_1.jpeg"),
+            ("Pen Drive 128 Gb Kingston Exodia DTX Negro", "Pen Drives", 24999.0, 71, "https://mexx-img-2019.s3.amazonaws.com/Pen-Drive-128-Gb-Kingston-Exodia-DTX-Negro_47243_1.jpeg"),
+            ("Proyector Epson EpiqVision CO-FH02", "Proyectores", 853289.0, 16, "https://mexx-img-2019.s3.amazonaws.com/47947_1.jpeg"),
+            ('Notebook Nsx Alkon Core i5 8Gb Ssd 256Gb 14" Win11', "Notebooks", 565139.0, 34, "https://mexx-img-2019.s3.amazonaws.com/Notebook-Nsx-Alkon-Core-i5-8Gb-Ssd-256Gb-14-Win-11_51000_1.jpeg"),
+            ("Adaptador Bluetooth TP-link UB500", "Multimedia", 11420.0, 61, "https://fullh4rd.com.ar/img/productos/30/adaptador-bluetooth-tplink-ub500-plus-long-range-largo-alcance-0.jpg"),
+            ("Adaptador coolermaster 3x8 pin PCIE", "Multimedia", 13455.0, 30, "https://fullh4rd.com.ar/img/productos/54/adaptador-coolermaster-90-3x8-pin-pcie-a-12vhpw-pseries-mwegxxg-0.jpg"),
+            ("Joystick trust yula pc ps3 GXT540", "Consolas", 41670.0, 26, "https://fullh4rd.com.ar/img/productos/44/joystick-trust-yula-pc-ps3-gxt540-1.jpg"),
+            ("Parlante genius SP-HF180 6W", "Audio", 15808.0, 43, "https://fullh4rd.com.ar/img/productos/15/parlante-genius-sphf180-6w-usb-power-madera-0.jpg"),
+            ("Camara IP ezviz H9C dual 2k", "Perifericos", 121419.0, 15, "https://fullh4rd.com.ar/img/productos/79/camara-ip-ezviz-h9c-dual-2k-wifi-doble-lente-exterior-0.jpg"),
+            ("Router Asus RT-N300 B1", "Perifericos", 26621.0, 9, "https://fullh4rd.com.ar/img/productos/27/router-asus-rtn300-b1-300mbps-5dbi-0.jpg")
         ]
 
         # Insertamos los datos de prueba
