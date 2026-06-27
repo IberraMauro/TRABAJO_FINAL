@@ -20,6 +20,16 @@
     </header>
 
     <main class="contenedor">
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% if mensajes %}
+                <div class="toast-contenedor" aria-live="polite">
+                    {% for categoria, mensaje in mensajes %}
+                        <div class="toast-mensaje toast-{{ categoria }}">{{ mensaje }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
         {% block contenido %}
         {% endblock %}
     </main>

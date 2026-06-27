@@ -37,6 +37,43 @@ footer p { margin: 0; }
 /* Evita que el padding rompa los márgenes de las cajas de texto */
 input { box-sizing: border-box; font-family: inherit; }
 
+/* --- MENSAJES TOAST --- */
+.toast-contenedor {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.toast-mensaje {
+    min-width: 260px;
+    max-width: min(420px, calc(100vw - 32px));
+    padding: 12px 20px;
+    border-radius: 8px;
+    background-color: #eefaf3;
+    color: #1f8f4d;
+    border: 1px solid #bfe8cf;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+    text-align: center;
+    font-weight: 600;
+    animation: toast-desaparecer 2s ease forwards;
+}
+
+.toast-success {
+    background-color: #eefaf3;
+    color: #1f8f4d;
+    border-color: #bfe8cf;
+}
+
+@keyframes toast-desaparecer {
+    0% { opacity: 0; transform: translateY(10px); }
+    15% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(10px); visibility: hidden; }
+}
+
 /* --- BARRA DE NAVEGACIÓN --- */
 header {
     background-color: #fff;
@@ -156,6 +193,22 @@ tr:hover { background-color: #f8f9fa; }
 .producto-precio { font-size: 20px; color: #333; font-weight: 400; }
 .envio-gratis { font-size: 12px; color: #00a650; font-weight: 600; margin-top: 2px; }
 .stock-disponible { font-size: 12px; color: #666; margin-bottom: 12px; }
+.alerta-stock {
+    margin: -6px 0 12px 0;
+    padding: 7px 9px;
+    border-radius: 6px;
+    background-color: #fff8e1;
+    color: #9a6700;
+    border: 1px solid #f5d277;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+.alerta-stock-ultima {
+    background-color: #fff0f0;
+    color: #c0392b;
+    border-color: #f1b4ad;
+}
 .formulario-compra { margin-top: auto; }
 .selector-cantidad { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; }
 .selector-cantidad input { width: 50px; padding: 4px; border: 1px solid #ccc; border-radius: 4px; }

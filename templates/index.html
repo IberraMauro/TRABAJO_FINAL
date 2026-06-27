@@ -30,6 +30,11 @@
             </div>
 
             <p class="stock-disponible">Stock disponible: <strong>{{ prod[4] }}</strong></p>
+            {% if prod[4] == 1 %}
+                <p class="alerta-stock alerta-stock-ultima">🔥 ¡Última unidad!</p>
+            {% elif prod[4] > 1 and prod[4] <= 5 %}
+                <p class="alerta-stock">⚠ ¡Quedan pocas unidades!</p>
+            {% endif %}
 
             {% if prod[4] > 0 %}
                 <form action="/agregar/{{ prod[0] }}" method="POST" class="formulario-compra">
