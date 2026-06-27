@@ -122,5 +122,23 @@
             cajaResultados.style.display = 'none';
         }
     });
+    // 5. Enfocar (hacer scroll) a la tarjeta al hacerle clic
+    const tarjetas = document.querySelectorAll('.tarjeta-producto');
+
+    tarjetas.forEach(tarjeta => {
+        tarjeta.addEventListener('click', function(evento) {
+            // Identificamos qué elemento exacto fue clickeado
+            const elementoClickeado = evento.target.tagName.toLowerCase();
+
+            // Si el usuario hace clic en el botón de comprar o en el input de cantidad,
+            // no hacemos el scroll para no interrumpir su compra.
+            if (elementoClickeado === 'button' || elementoClickeado === 'input') {
+                return;
+            }
+
+            // Desliza la pantalla suavemente hasta dejar la tarjeta en el centro de la vista
+            this.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    });
 </script>
 {% endblock %}
