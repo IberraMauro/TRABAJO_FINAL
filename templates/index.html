@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
-<h2 class="titulo-seccion"> </h2>
+<h2 class="titulo-seccion" style="text-align: center; margin-top: 0; margin-bottom: 25px; font-size: 2.5rem; font-weight: 600; color: #222; line-height: 1.1;">Nuestro Catálogo</h2>
+
+<!-- BARRA DE BÚSQUEDA -->
+<div class="buscador-contenedor">
+    <input type="text" id="input-buscador" class="buscador-input" placeholder="🔍 Buscar por nombre (ej: ratón, teclado, monitor...)">
+    <div id="resultados-buscador" class="buscador-resultados"></div>
+</div>
 
 <div class="grid-productos">
     {% for prod in productos %}
-    <div class="tarjeta-producto {% if prod[4] <= 0 %}agotado{% endif %}">
+    <!-- Le agregamos un ID único a cada tarjeta para poder navegar hacia ella -->
+    <div class="tarjeta-producto {% if prod[4] <= 0 %}agotado{% endif %}" id="producto-{{ prod[0] }}">
 
         <div class="contenedor-imagen" style="position: relative;">
             <img src="{{ prod[5] }}" alt="{{ prod[1] }}">
@@ -39,4 +46,81 @@
     </div>
     {% endfor %}
 </div>
+
+<!-- LÓGICA DE BÚSQUEDA -->
+<script>
+    // 1. Armamos una lista en JavaScript leyendo los datos de Jinja/Python
+    const productosJS = [
+        {% for prod in productos %}
+        { id: {{ prod[0] }}, nombre: "{{ prod[1] }}" },
+        {% endfor %}
+    ];
+
+    const inputBuscador = document.getElementById('input-buscador');
+    const cajaResultados = document.getElementById('resultados-buscador');
+
+    // 2. Función clave: Quita tildes, diacríticos y pasa todo a minúscula
+    function normalizarTexto(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+
+    // 3. Escuchar cada vez que el usuario teclea algo
+    inputBuscador.addEventListener('input', function() {
+        const busqueda = normalizarTexto(this.value);
+        cajaResultados.innerHTML = ''; // Limpiamos resultados anteriores
+
+        if (busqueda.length > 0) {
+            // Filtramos la lista buscando coincidencias
+            const filtrados = productosJS.filter(p => normalizarTexto(p.nombre).includes(busqueda));
+
+            if (filtrados.length > 0) {
+                cajaResultados.style.display = 'block';
+
+                // Por cada coincidencia, creamos un div visual
+                filtrados.forEach(p => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'buscador-item';
+                    itemDiv.textContent = p.nombre;
+
+                    // Acción al hacer clic en el resultado
+                    itemDiv.onclick = () => {
+                        const tarjetaDestino = document.getElementById('producto-' + p.id);
+
+                        // Hacemos scroll suave hacia el producto
+                        tarjetaDestino.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        // Le damos un destello azul temporal para que el usuario lo ubique rápido
+                        tarjetaDestino.style.transition = 'box-shadow 0.3s';
+                        tarjetaDestino.style.boxShadow = '0 0 50px #000000';
+                        setTimeout(() => tarjetaDestino.style.boxShadow = '0 1px 2px rgba(0,0,0,0.1)', 2000);
+
+                        // Ocultamos el buscador tras elegir
+                        inputBuscador.value = '';
+                        cajaResultados.style.display = 'none';
+                    };
+
+                    cajaResultados.appendChild(itemDiv);
+                });
+            } else {
+                // Si escribió algo pero no hay coincidencias
+                cajaResultados.style.display = 'block';
+                const sinResultados = document.createElement('div');
+                sinResultados.className = 'buscador-item';
+                sinResultados.style.color = '#999';
+                sinResultados.style.cursor = 'default';
+                sinResultados.textContent = 'No se encontraron productos...';
+                cajaResultados.appendChild(sinResultados);
+            }
+        } else {
+            cajaResultados.style.display = 'none'; // Si borra todo, ocultamos la caja
+        }
+    });
+
+    // 4. Ocultar la caja de resultados si hace clic en cualquier otro lado de la pantalla
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.buscador-contenedor')) {
+            cajaResultados.style.display = 'none';
+        }
+    });
+</script>
 {% endblock %}
